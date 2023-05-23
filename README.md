@@ -96,3 +96,16 @@ previous one (undefined behavior).
   - the first byte is the length of the error message
   - the following bytes are the message itself, UTF8-encoded
 
+The [testing](testing) program is a Go program that generates matrices of all valid types
+of sizes 100x100, 1000x1000 and 10000x10000, concurrently runs a server
+and multiple clients, goes over all matrices on all clients with a single
+reserve - calc - poll until completed cycle, and then verifies that the matrices
+received from the server are transposed correclty.
+
+The program also writes data about requests and responses, including time of
+receiving/sending, by reading them directly from the server and the clients.
+The data is written to client.csv and server.csv files, which can be used
+for analyzing response times depending on the workload and such. There is also
+a [testing_run.log](testing/testing_run.log) file, which contains the output of
+a run of the [testing](testing) program on my computer.
+
